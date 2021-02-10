@@ -12,6 +12,7 @@
   "author": "hp77",
   "license": "ISC",
   "dependencies": {
-    "node-fetch": "^2.6.1"
+    "node-fetch": "^2.6.1",
+    "semver": "^7.3.4"
   }
 }
