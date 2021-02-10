@@ -1,5 +1,6 @@
 import fetch from 'node-fetch';
 import semver from 'semver';
+import fs from 'fs-extra';
 
 async function fetchPackage({name, reference}){
     if(semver.valid(reference)){
@@ -9,6 +10,10 @@ async function fetchPackage({name, reference}){
                 reference: `https://registry.yarnpkg.com/${name}/-/${name}-${reference}.tgz`,
             }
         );
+    }
+
+    if(['/', './', '../'].some(prefix => reference.startsWith(prefix))){
+        return await fs.readFile(reference);
     }
     let response = await fetch(reference);
 

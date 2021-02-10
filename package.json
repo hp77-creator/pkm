@@ -12,6 +12,7 @@
   "author": "hp77",
   "license": "ISC",
   "dependencies": {
+    "fs-extra": "^9.1.0",
     "node-fetch": "^2.6.1",
     "semver": "^7.3.4"
   }
