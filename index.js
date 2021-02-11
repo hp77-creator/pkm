@@ -2,6 +2,21 @@ import fetch from 'node-fetch';
 import semver from 'semver';
 import fs from 'fs-extra';
 
+import {readPackageJsonFromArchive} from './utilities.js';
+
+
+async function getPackageDependencies({name, reference}){
+    let packageBuffer = await fetchPackage({name, reference});
+    let packageJson = JSON.parse(await readPackageJsonFromArchive(packageBuffer));
+
+
+    let dependencies = packageJson.dependencies || {};
+
+    return Object.keys(dependencies).map(name => {
+        return {name, reference: dependencies[name]};
+    });
+}
+
 
 async function getPinnedReferences({name, reference}){
     if(semver.validRange(reference) && !semver.valid(reference)){
